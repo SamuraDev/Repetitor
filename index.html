@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Bot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            width: 300px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Telegram Bot</h1>
+    <input type="text" id="message" placeholder="Введите сообщение">
+    <button id="sendMessage">Отправить сообщение</button>
+
+    <script>
+        const token = '7510236584:AAEpId-AiOqQA4IrmMM6AYC6n6MumeuoaAc'; // Замените на токен вашего бота
+        const chatId = '5253442722'; // Замените на ID вашего чата или пользователя
+
+        document.getElementById('sendMessage').onclick = function () {
+            const message = document.getElementById('message').value;
+            if (message) {
+                fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert('Сообщение отправлено!');
+                    } else {
+                        alert('Ошибка при отправке сообщения.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    alert('Ошибка при отправке сообщения.');
+                });
+            } else {
+                alert('Пожалуйста, введите сообщение.');
+            }
+        };
+    </script>
+
+</body>
+</html>
