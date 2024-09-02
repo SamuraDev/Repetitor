@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Bot</title>
+    <title>Обращение к гражданам</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,13 +14,16 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            text-align: center;
         }
-        input {
+        textarea {
             padding: 10px;
             border-radius: 5px;
             border: none;
-            width: 300px;
+            width: 400px; /* Увеличенная ширина */
+            height: 150px; /* Увеличенная высота */
             margin: 10px 0;
+            resize: none; /* Отключение изменения размера */
         }
         button {
             padding: 10px 15px;
@@ -37,8 +40,8 @@
 </head>
 <body>
 
-    <h1>Telegram Bot</h1>
-    <input type="text" id="message" placeholder="Введите сообщение">
+    <h1>Обращение к гражданам</h1>
+    <textarea id="message" placeholder="Введите ваше обращение здесь..."></textarea>
     <button id="sendMessage">Отправить сообщение</button>
 
     <script>
@@ -62,6 +65,7 @@
                 .then(data => {
                     if (data.ok) {
                         alert('Сообщение отправлено!');
+                        document.getElementById('message').value = ''; // Очистка поля ввода после отправки
                     } else {
                         alert('Ошибка при отправке сообщения.');
                     }
